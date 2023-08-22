@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'core/app_color.dart';
 
 void main() {
+  // For disabling landscape view
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
   runApp(const MyApp());
 }
 
@@ -11,9 +19,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Recipe App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: false,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Poppins',
+        splashColor: AppColors.kGreen.withOpacity(0.20),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.kGreen),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -48,9 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text(
               'You have pushed the button this many times:',
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold
+                
+              ),
             ),
             Text(
               '$_counter',
