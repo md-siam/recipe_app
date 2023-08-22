@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'core/app_color.dart';
+import 'pages/recipe_page.dart';
 
 void main() {
   // For disabling landscape view
@@ -25,61 +26,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         splashColor: AppColors.kGreen.withOpacity(0.20),
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.kGreen),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold
-                
-              ),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: AppColors.kGreen,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: const RecipePage(),
     );
   }
 }
