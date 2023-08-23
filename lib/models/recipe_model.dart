@@ -1,28 +1,4 @@
-import 'dart:convert';
-
-List<RecipeModel> recipeModelFromJson(String str) => List<RecipeModel>.from(
-    json.decode(str).map((x) => RecipeModel.fromJson(x)));
-
-String recipeModelToJson(List<RecipeModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class RecipeModel {
-  Recipe recipe;
-
-  RecipeModel({
-    required this.recipe,
-  });
-
-  factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
-        recipe: Recipe.fromJson(json["recipe"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "recipe": recipe.toJson(),
-      };
-}
-
-class Recipe {
   String uri;
   String label;
   String image;
@@ -45,7 +21,7 @@ class Recipe {
   Map<String, Total> totalDaily;
   List<Digest> digest;
 
-  Recipe({
+  RecipeModel({
     required this.uri,
     required this.label,
     required this.image,
@@ -69,7 +45,7 @@ class Recipe {
     required this.digest,
   });
 
-  factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
+  factory RecipeModel.fromJson(Map<String, dynamic> json) => RecipeModel(
         uri: json["uri"],
         label: json["label"],
         image: json["image"],
