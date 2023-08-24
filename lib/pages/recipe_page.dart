@@ -152,6 +152,7 @@ class _RecipePageState extends State<RecipePage> {
                                             cuisineType: recipeData.cuisineType,
                                             ingredientLines:
                                                 recipeData.ingredientLines,
+                                            totalDaily: recipeData.totalDaily,
                                           ),
                                         ),
                                       );

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:recipe_app/core/app_color.dart';
 
+import '../models/recipe_model.dart';
 import '../widgets/deep_label.dart';
 import '../widgets/health_n_cuisine_card.dart';
 import '../widgets/ingredient_card.dart';
@@ -19,6 +20,7 @@ class RecipeDetailPage extends StatefulWidget {
   final List<String>? healthLabel;
   final List<String>? cuisineType;
   final List<String>? ingredientLines;
+  final TotalDaily? totalDaily;
 
   const RecipeDetailPage({
     Key? key,
@@ -28,6 +30,7 @@ class RecipeDetailPage extends StatefulWidget {
     this.healthLabel,
     this.cuisineType,
     this.ingredientLines,
+    this.totalDaily,
   }) : super(key: key);
 
   @override
@@ -225,7 +228,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Nutrition'),
                           const SizedBox(height: 5.0),
-                          const NutritionCard1(),
+                          NutritionCard1(totalDaily: widget.totalDaily),
                           //
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Tags'),

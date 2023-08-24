@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:recipe_app/core/app_color.dart';
 
+import '../models/recipe_model.dart';
+
 class NutritionCard1 extends StatelessWidget {
-  const NutritionCard1({Key? key}) : super(key: key);
+  final TotalDaily? totalDaily;
+  const NutritionCard1({
+    Key? key,
+    this.totalDaily,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final cal = totalDaily!.cA!.quantity.toString().split('.').first;
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -13,7 +21,7 @@ class NutritionCard1 extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _infoSection('136', 'CAL / SERV'),
+            _infoSection(cal, 'CAL / SERV'),
             const SizedBox(
               height: 50,
               child: VerticalDivider(
