@@ -29,16 +29,25 @@ This application is using one third-party package from the open-source community
 ## File Pattern Inside The `lib` Folder
 
 ```
-lib
-├── app
-│   ├── graphql
-│   │   └── queries.dart
-│   ├── model
-│   │   └── pokemon_model.dart
-│   ├── pages
-│   │   ├── detail_page.dart
-│   │   └── home_page.dart
-│   └── widgets
-│       └── fetch_more_widget.dart
+lib/
+├── core/
+│   ├── app_color.dart
+│   └── sample_data.json
+├── models/
+│   └── recipe_model.dart
+├── pages/
+│   ├── recipe_detail_page.dart
+│   └── recipe_page.dart
+├── widgets/
+│   ├── deep_label.dart
+│   ├── empty_search.dart
+│   ├── health_n_cuisine_card.dart
+│   ├── ingredient_card.dart
+│   ├── light_label.dart
+│   ├── nutrition_card_1.dart
+│   ├── nutrition_card_2.dart
+│   ├── recipe_card.dart
+│   ├── refine_search_text.dart
+│   └── rounded_button.dart
 └── main.dart
 ```
