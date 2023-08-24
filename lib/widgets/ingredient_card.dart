@@ -21,7 +21,9 @@ class IngredientCard extends StatelessWidget {
         ),
         Positioned(
           top: 30,
-          child: FittedBox(
+          child: Container(
+            alignment: Alignment.center,
+            width: 100,
             child: Text(
               title,
               style: const TextStyle(
@@ -32,10 +34,11 @@ class IngredientCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 20,
+          bottom: 8.0,
           child: FittedBox(
             child: Text(
               subtitle,
+              textAlign: TextAlign.center,
             ),
           ),
         ),

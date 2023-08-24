@@ -18,6 +18,8 @@ class RecipeDetailPage extends StatefulWidget {
   final String source;
   final List<String>? healthLabel;
   final List<String>? cuisineType;
+  final List<String>? ingredientLines;
+
   const RecipeDetailPage({
     Key? key,
     required this.label,
@@ -25,6 +27,7 @@ class RecipeDetailPage extends StatefulWidget {
     required this.source,
     this.healthLabel,
     this.cuisineType,
+    this.ingredientLines,
   }) : super(key: key);
 
   @override
@@ -42,8 +45,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.healthLabel![0]);
-    //
     return Scaffold(
       body: Stack(
         children: [
@@ -187,16 +188,30 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                               physics: const BouncingScrollPhysics(),
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: 15,
+                              itemCount: widget.ingredientLines!.length,
                               separatorBuilder:
                                   (BuildContext context, int index) {
                                 return const SizedBox(width: 10);
                               },
                               itemBuilder: (BuildContext context, int index) {
-                                return const IngredientCard(
-                                  title: '2.0 tbs',
-                                  subtitle: 'Vegetable Oil',
-                                );
+                                final split =
+                                    widget.ingredientLines![index].split(' ');
+                                if (split.length == 2) {
+                                  return IngredientCard(
+                                    title: split[0],
+                                    subtitle: split[1],
+                                  );
+                                } else if (split.length == 3) {
+                                  return IngredientCard(
+                                    title: split[0],
+                                    subtitle: '${split[1]}\n${split[2]}',
+                                  );
+                                } else {
+                                  return IngredientCard(
+                                    title: split[0],
+                                    subtitle: '${split[1]}\n${split[2]}',
+                                  );
+                                }
                               },
                             ),
                           ),

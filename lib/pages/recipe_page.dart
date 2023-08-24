@@ -29,7 +29,7 @@ class _RecipePageState extends State<RecipePage> {
     super.initState();
     _checkInternetConnection();
     photoModel = Provider.of<RecipeInfoProvider>(context, listen: false);
-    photoModel.getPhotoData('chicken');
+    photoModel.getPhotoData('duck');
   }
 
   Future<void> _checkInternetConnection() async {
@@ -150,6 +150,8 @@ class _RecipePageState extends State<RecipePage> {
                                             healthLabel:
                                                 recipeData.healthLabels,
                                             cuisineType: recipeData.cuisineType,
+                                            ingredientLines:
+                                                recipeData.ingredientLines,
                                           ),
                                         ),
                                       );
