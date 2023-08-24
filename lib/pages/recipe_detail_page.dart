@@ -3,8 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:recipe_app/core/app_color.dart';
 
 import '../widgets/deep_label.dart';
+import '../widgets/health_n_cuisine_card.dart';
 import '../widgets/ingredient_card.dart';
 import '../widgets/light_label.dart';
+import '../widgets/nutrition_card_1.dart';
+import '../widgets/nutrition_card_2.dart';
 import '../widgets/refine_search_text.dart';
 import '../widgets/rounded_button.dart';
 
@@ -86,7 +89,10 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     ),
                   ],
                 ),
-                const RefineSearchText(),
+                const RefineSearchText(
+                  firstString: 'REFINE SEARCH BY',
+                  secondString: 'Calories, Diet, Ingredients',
+                ),
                 Expanded(
                   child: Padding(
                     padding:
@@ -150,9 +156,15 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           ),
                           const SizedBox(height: 15),
                           const LightLabel(label: 'Health Labels:'),
+                          const SizedBox(height: 5.0),
+                          const HealthNCuisineCard(label: 'Mediterranean'),
                           const SizedBox(height: 15),
+                          //
                           const LightLabel(label: 'Cuisine Type:'),
+                          const SizedBox(height: 5.0),
+                          const HealthNCuisineCard(label: 'Italian'),
                           const SizedBox(height: 20),
+                          //
                           const DeepLabel(label: 'Ingredients'),
                           SizedBox(
                             height: 120,
@@ -166,24 +178,42 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                 return const SizedBox(width: 10);
                               },
                               itemBuilder: (BuildContext context, int index) {
-                                return const IngredientCard();
+                                return const IngredientCard(
+                                  title: '2.0 tbs',
+                                  subtitle: 'Vegetable Oil',
+                                );
                               },
                             ),
                           ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     IngredientCard(),
-                          //   ],
-                          // ),
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Preparation'),
+                          const SizedBox(height: 5.0),
+                          const RefineSearchText(
+                            firstString: 'Instructions on',
+                            secondString: 'BBC Food',
+                          ),
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Nutrition'),
+                          const SizedBox(height: 5.0),
+                          const NutritionCard1(),
+                          //
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Tags'),
+                          const SizedBox(height: 5.0),
+                          const Text(
+                            'Low-Carb, Dairy-Free, Egg-Free, Peanut-Free, Tree-Nut-Free, Soy-Free, Fish-Free',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: AppColors.kDeepGrey,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          //
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Nutrition'),
+                          const SizedBox(height: 5.0),
+                          const NutritionCard2(),
+                          //
                           const SizedBox(height: 24),
                         ],
                       ),
