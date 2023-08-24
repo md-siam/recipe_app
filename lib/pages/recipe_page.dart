@@ -14,6 +14,12 @@ class _RecipePageState extends State<RecipePage> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void dispose() {
+    _controller.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
