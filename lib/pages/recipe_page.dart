@@ -13,7 +13,7 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage> {
   final TextEditingController _controller = TextEditingController();
-  bool displayEmptyPage = true;
+  bool displayEmptyPage = false;
 
   @override
   void dispose() {
