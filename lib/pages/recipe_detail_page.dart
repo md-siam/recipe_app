@@ -16,11 +16,15 @@ class RecipeDetailPage extends StatefulWidget {
   final String label;
   final String imageLink;
   final String source;
+  final List<String>? healthLabel;
+  final List<String>? cuisineType;
   const RecipeDetailPage({
     Key? key,
     required this.label,
     required this.imageLink,
     required this.source,
+    this.healthLabel,
+    this.cuisineType,
   }) : super(key: key);
 
   @override
@@ -38,6 +42,8 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.healthLabel![0]);
+    //
     return Scaffold(
       body: Stack(
         children: [
@@ -166,12 +172,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           const SizedBox(height: 15),
                           const LightLabel(label: 'Health Labels:'),
                           const SizedBox(height: 5.0),
-                          const HealthNCuisineCard(label: 'Mediterranean'),
+                          HealthNCuisineCard(label: widget.healthLabel),
                           const SizedBox(height: 15),
                           //
                           const LightLabel(label: 'Cuisine Type:'),
                           const SizedBox(height: 5.0),
-                          const HealthNCuisineCard(label: 'Italian'),
+                          HealthNCuisineCard(label: widget.cuisineType),
                           const SizedBox(height: 20),
                           //
                           const DeepLabel(label: 'Ingredients'),
