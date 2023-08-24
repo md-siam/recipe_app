@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:recipe_app/core/app_color.dart';
 
+import '../widgets/deep_label.dart';
+import '../widgets/ingredient_card.dart';
+import '../widgets/light_label.dart';
+import '../widgets/refine_search_text.dart';
 import '../widgets/rounded_button.dart';
 
 class RecipeDetailPage extends StatefulWidget {
@@ -82,6 +86,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     ),
                   ],
                 ),
+                const RefineSearchText(),
                 Expanded(
                   child: Padding(
                     padding:
@@ -144,36 +149,41 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                             ],
                           ),
                           const SizedBox(height: 15),
-                          const Text(
-                            "Health Labels:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 165, 166, 168),
-                            ),
-                          ),
+                          const LightLabel(label: 'Health Labels:'),
                           const SizedBox(height: 15),
-                          const Text(
-                            "Cuisine Type:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 165, 166, 168),
-                            ),
-                          ),
+                          const LightLabel(label: 'Cuisine Type:'),
                           const SizedBox(height: 20),
-                          const Text(
-                            'Ingredients',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.kBoldTextColor,
-                              decoration: TextDecoration.underline,
-                              decorationColor:
-                                  AppColors.kBoldTextUnderLineColor,
-                              decorationThickness: 3,
+                          const DeepLabel(label: 'Ingredients'),
+                          SizedBox(
+                            height: 120,
+                            child: ListView.separated(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 15,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(width: 10);
+                              },
+                              itemBuilder: (BuildContext context, int index) {
+                                return const IngredientCard();
+                              },
                             ),
                           ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: [
+                          //     IngredientCard(),
+                          //   ],
+                          // ),
+                          const SizedBox(height: 20),
+                          const DeepLabel(label: 'Preparation'),
+                          const SizedBox(height: 20),
+                          const DeepLabel(label: 'Nutrition'),
+                          const SizedBox(height: 20),
+                          const DeepLabel(label: 'Tags'),
+                          const SizedBox(height: 20),
+                          const DeepLabel(label: 'Nutrition'),
                           const SizedBox(height: 24),
                         ],
                       ),
