@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'core/app_color.dart';
 import 'pages/recipe_page.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   // For disabling landscape view
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
