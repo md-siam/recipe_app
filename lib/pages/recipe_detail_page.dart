@@ -89,6 +89,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 10),
                           Row(
@@ -119,12 +120,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                     Row(
                                       children: [
                                         RoundedButton(
-                                          icon: Icons.add,
+                                          imageLink: 'asset/images/add.svg',
                                           onTapEvent: () {},
                                         ),
                                         const SizedBox(width: 10),
                                         RoundedButton(
-                                          icon: Icons.share,
+                                          imageLink: 'asset/images/share.svg',
                                           onTapEvent: () {},
                                         ),
                                       ],
@@ -141,6 +142,37 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                 ),
                               ),
                             ],
+                          ),
+                          const SizedBox(height: 15),
+                          const Text(
+                            "Health Labels:",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 165, 166, 168),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          const Text(
+                            "Cuisine Type:",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 165, 166, 168),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            'Ingredients',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.kBoldTextColor,
+                              decoration: TextDecoration.underline,
+                              decorationColor:
+                                  AppColors.kBoldTextUnderLineColor,
+                              decorationThickness: 3,
+                            ),
                           ),
                           const SizedBox(height: 24),
                         ],

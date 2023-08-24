@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../core/app_color.dart';
 
 class RoundedButton extends StatelessWidget {
-  final IconData icon;
+  final String imageLink;
   final VoidCallback onTapEvent;
   const RoundedButton({
     Key? key,
-    required this.icon,
+    required this.imageLink,
     required this.onTapEvent,
   }) : super(key: key);
 
@@ -16,14 +17,16 @@ class RoundedButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTapEvent,
       child: Container(
-        padding: const EdgeInsets.all(7),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: AppColors.kGreen,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Icon(
-          icon,
-          // size: 20,
+        child: SvgPicture.asset(
+          imageLink,
+          height: 20,
+          width: 20,
         ),
       ),
     );
