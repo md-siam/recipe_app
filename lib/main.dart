@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'core/app_color.dart';
 import 'pages/recipe_page.dart';
-import 'providers/recipe_info_provider.dart';
+import 'view_models/recipe_info_provider.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");

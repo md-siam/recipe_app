@@ -3,7 +3,19 @@ import 'package:flutter/material.dart';
 import '../core/app_color.dart';
 
 class RecipeCard extends StatelessWidget {
-  const RecipeCard({Key? key}) : super(key: key);
+  final String label;
+  final String imageLink;
+  final String source;
+  final String cal;
+  final String ingr;
+  const RecipeCard({
+    Key? key,
+    required this.label,
+    required this.imageLink,
+    required this.source,
+    required this.cal,
+    required this.ingr,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +32,28 @@ class RecipeCard extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(
-                'https://hot-thai-kitchen.com/wp-content/uploads/2022/05/cashew-chicken-sq.jpg',
-              ),
-              const Positioned(
+              Image.network(imageLink),
+              Positioned(
                 top: 0,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 3.0, left: 5.0),
+                  padding: const EdgeInsets.only(top: 3.0, left: 5.0),
                   child: Text(
-                    'Chicken Buffet',
-                    style: TextStyle(
+                    label,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ),
-              const Positioned(
+              Positioned(
                 bottom: 0,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 3.0, left: 5.0),
+                  padding: const EdgeInsets.only(bottom: 3.0, left: 5.0),
                   child: Text(
-                    'Serious Eats',
-                    style: TextStyle(
-                      color: Colors.white,
+                    source,
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 241, 238, 238),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -52,34 +62,34 @@ class RecipeCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5.0),
-          const IntrinsicHeight(
+          IntrinsicHeight(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '520',
-                  style: TextStyle(
+                  cal.split('.').first,
+                  style: const TextStyle(
                     color: Colors.green,
                   ),
                 ),
-                Text(
+                const Text(
                   '  CAL',
                   style: TextStyle(
                     color: AppColors.kDeepGrey,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                VerticalDivider(
+                const VerticalDivider(
                   thickness: 2,
                   color: Color.fromARGB(255, 198, 195, 195),
                 ),
                 Text(
-                  '5',
-                  style: TextStyle(
+                  ingr,
+                  style: const TextStyle(
                     color: Colors.green,
                   ),
                 ),
-                Text(
+                const Text(
                   '  INGR',
                   style: TextStyle(
                     color: AppColors.kDeepGrey,

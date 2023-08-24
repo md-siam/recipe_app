@@ -1,8 +1,13 @@
-import 'package:dio/dio.dart';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/pages/recipe_detail_page.dart';
 
 import '../core/app_color.dart';
+import '../view_models/recipe_info_provider.dart';
 import '../widgets/empty_search.dart';
 import '../widgets/recipe_card.dart';
 
@@ -15,27 +20,33 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage> {
   final TextEditingController _controller = TextEditingController();
+  late final RecipeInfoProvider photoModel;
+  bool _isConnected = false;
 
-  bool displayEmptyPage = true;
+  @override
+  void initState() {
+    super.initState();
+    _checkInternetConnection();
+    photoModel = Provider.of<RecipeInfoProvider>(context, listen: false);
+    photoModel.getPhotoData('chicken');
+  }
 
-  final dio = Dio(
-    BaseOptions(
-      baseUrl: 'https://edamam-recipe-search.p.rapidapi.com/search',
-      headers: {
-        'X-RapidAPI-Key': dotenv.env['X_RapidAPI_Key'],
-        'X-RapidAPI-Host': dotenv.env['X_RapidAPI_Host'],
-      },
-    ),
-  );
-
-  void searchRecipe(String query) async {
-    final response = await dio.get(
-      '',
-      queryParameters: {
-        'q': query,
-      },
-    );
-    print(response);
+  Future<void> _checkInternetConnection() async {
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        setState(() {
+          _isConnected = true;
+        });
+      }
+    } on SocketException catch (err) {
+      setState(() {
+        _isConnected = false;
+      });
+      if (kDebugMode) {
+        log(err.toString());
+      }
+    }
   }
 
   @override
@@ -89,38 +100,67 @@ class _RecipePageState extends State<RecipePage> {
               Icons.menu,
               size: 30,
             ),
-            onPressed: () {
-              
-            },
+            onPressed: () {},
           ),
         ],
       ),
-      body: displayEmptyPage
-          ? const EmptySearch()
-          : Padding(
-              padding: const EdgeInsets.all(8).copyWith(top: 15, bottom: 0),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    GridView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: .87,
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        return const RecipeCard();
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                  ],
-                ),
-              ),
-            ),
+      body: _isConnected
+          ? Consumer<RecipeInfoProvider>(
+              builder: (context, provider, child) {
+                return photoModel.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : Padding(
+                        padding: const EdgeInsets.all(8)
+                            .copyWith(top: 15, bottom: 0),
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              GridView.builder(
+                                itemCount: 10,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: .87,
+                                ),
+                                itemBuilder: (BuildContext context, int index) {
+                                  final recipeData =
+                                      provider.recipeList![index].recipe!;
+
+                                  return GestureDetector(
+                                    child: RecipeCard(
+                                      label: '${recipeData.label}',
+                                      imageLink: '${recipeData.image}',
+                                      source: '${recipeData.source}',
+                                      cal: '${recipeData.calories}',
+                                      ingr: '${recipeData.ingredients!.length}',
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              RecipeDetailPage(
+                                            label: '${recipeData.label}',
+                                            imageLink: '${recipeData.image}',
+                                            source: '${recipeData.source}',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                          ),
+                        ),
+                      );
+              },
+            )
+          : const EmptySearch(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:recipe_app/core/app_color.dart';
 
 import '../widgets/deep_label.dart';
@@ -12,7 +13,15 @@ import '../widgets/refine_search_text.dart';
 import '../widgets/rounded_button.dart';
 
 class RecipeDetailPage extends StatefulWidget {
-  const RecipeDetailPage({Key? key}) : super(key: key);
+  final String label;
+  final String imageLink;
+  final String source;
+  const RecipeDetailPage({
+    Key? key,
+    required this.label,
+    required this.imageLink,
+    required this.source,
+  }) : super(key: key);
 
   @override
   State<RecipeDetailPage> createState() => _RecipeDetailPageState();
@@ -110,18 +119,18 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "Wok-Fried Duck & Oyster Sauce",
-                                      style: TextStyle(
+                                    Text(
+                                      widget.label,
+                                      style: const TextStyle(
                                         fontSize: 18,
                                         color: AppColors.kBoldTextColor,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                     const SizedBox(height: 5.0),
-                                    const Text(
-                                      "See full recipe on: BBC Good Food",
-                                      style: TextStyle(
+                                    Text(
+                                      "See full recipe on: ${widget.source}",
+                                      style: const TextStyle(
                                         fontSize: 15,
                                         color: AppColors.kBoldTextColor,
                                         fontWeight: FontWeight.w500,
@@ -147,7 +156,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image.network(
-                                  'https://hot-thai-kitchen.com/wp-content/uploads/2022/05/cashew-chicken-sq.jpg',
+                                  widget.imageLink,
                                   height: 168,
                                   width: 168,
                                 ),
@@ -253,7 +262,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                         color: AppColors.kDeepGrey,
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                               ),
