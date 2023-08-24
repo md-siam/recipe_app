@@ -211,8 +211,58 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           //
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Nutrition'),
-                          const SizedBox(height: 5.0),
-                          const NutritionCard2(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Material(
+                              elevation: 4.0,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(50),
+                              ),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                  vertical: 10,
+                                ),
+                                decoration: const ShapeDecoration(
+                                  color: Colors.white,
+                                  shape: StadiumBorder(),
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Fat',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: AppColors.kBoldTextColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Carbs',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: AppColors.kDeepGrey,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Protein',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: AppColors.kDeepGrey,
+                                      ),
+                                    ),
+                                    
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          const NutritionCard2(
+                            title: 'Fat',
+                          ),
                           //
                           const SizedBox(height: 24),
                         ],

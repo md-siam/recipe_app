@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'core/app_color.dart';
-import 'pages/recipe_detail_page.dart';
+import 'pages/recipe_page.dart';
 
 void main() {
   // For disabling landscape view
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           color: AppColors.kGreen,
         ),
       ),
-      home: const RecipeDetailPage(),
+      home: const RecipePage(),
     );
   }
 }
