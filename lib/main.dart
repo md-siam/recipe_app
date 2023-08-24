@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
 import 'core/app_color.dart';
 import 'pages/recipe_page.dart';
+import 'providers/recipe_info_provider.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -20,19 +22,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Recipe App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: false,
-        fontFamily: 'Poppins',
-        splashColor: AppColors.kGreen.withOpacity(0.20),
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.kGreen),
-        progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: AppColors.kGreen,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RecipeInfoProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Recipe App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: false,
+          fontFamily: 'Poppins',
+          splashColor: AppColors.kGreen.withOpacity(0.20),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.kGreen),
+          progressIndicatorTheme: const ProgressIndicatorThemeData(
+            color: AppColors.kGreen,
+          ),
         ),
+        home: const RecipePage(),
       ),
-      home: const RecipePage(),
     );
   }
 }

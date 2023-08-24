@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:recipe_app/core/app_color.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../core/app_color.dart';
 import '../widgets/empty_search.dart';
 import '../widgets/recipe_card.dart';
 
@@ -13,7 +15,28 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage> {
   final TextEditingController _controller = TextEditingController();
-  bool displayEmptyPage = false;
+
+  bool displayEmptyPage = true;
+
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://edamam-recipe-search.p.rapidapi.com/search',
+      headers: {
+        'X-RapidAPI-Key': dotenv.env['X_RapidAPI_Key'],
+        'X-RapidAPI-Host': dotenv.env['X_RapidAPI_Host'],
+      },
+    ),
+  );
+
+  void searchRecipe(String query) async {
+    final response = await dio.get(
+      '',
+      queryParameters: {
+        'q': query,
+      },
+    );
+    print(response);
+  }
 
   @override
   void dispose() {
@@ -56,6 +79,9 @@ class _RecipePageState extends State<RecipePage> {
               },
             )
           ],
+          // onChanged: (newValue) {
+          //   print(newValue);
+          // },
         ),
         actions: [
           IconButton(
@@ -63,7 +89,9 @@ class _RecipePageState extends State<RecipePage> {
               Icons.menu,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              
+            },
           ),
         ],
       ),
