@@ -85,11 +85,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsets.all(24).copyWith(top: 15, bottom: 0),
+                        const EdgeInsets.all(24).copyWith(top: 0, bottom: 0),
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -141,6 +142,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 24),
                         ],
                       ),
                     ),
