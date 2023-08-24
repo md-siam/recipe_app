@@ -87,6 +87,7 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                     padding:
                         const EdgeInsets.all(24).copyWith(top: 15, bottom: 0),
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Row(
