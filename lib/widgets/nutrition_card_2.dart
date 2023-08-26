@@ -77,6 +77,7 @@ class NutritionCard2 extends StatelessWidget {
                         '${digest![index].label}',
                         digest![index].total,
                         digest![index].daily,
+                        digest![index].sub,
                       );
                     },
                   ),
@@ -89,19 +90,27 @@ class NutritionCard2 extends StatelessWidget {
     );
   }
 
-  Widget _digestInformation(String label, double? total, double? daily) {
+  Widget _digestInformation(
+    String label,
+    double? total,
+    double? daily,
+    List<Sub>? subCategory,
+  ) {
     double percentage = ((total! - daily!) / total) * 100;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(width: 5.0),
@@ -147,6 +156,31 @@ class NutritionCard2 extends StatelessWidget {
                       thickness: 1,
                       color: Colors.black,
                     ),
+                  ),
+                  SizedBox(
+                    height: 100,
+                    width: 200,
+                    child: subCategory != null
+                        ? ListView.builder(
+                            itemCount: subCategory.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Row(
+                                children: [
+                                  Text('${subCategory[index].label}'),
+                                  const Spacer(),
+                                  Text(
+                                      '${subCategory[index].total.toString().split('.').first}g'),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    '${subCategory[index].total.toString().split('.').first}%',
+                                  ),
+                                ],
+                              );
+                            },
+                          )
+                        : const SizedBox.shrink(),
                   ),
                 ],
               ),

@@ -112,18 +112,23 @@ class _RecipePageState extends State<RecipePage> {
               final recipeData = provider.recipeList![index].recipe!;
 
               return GestureDetector(
-                child: RecipeCard(
-                  label: '${recipeData.label}',
-                  imageLink: '${recipeData.image}',
-                  source: '${recipeData.source}',
-                  cal: '${recipeData.calories}',
-                  ingr: '${recipeData.ingredients!.length}',
+                child:Hero(
+                  tag: index,
+                  child: RecipeCard(
+
+                    label: '${recipeData.label}',
+                    imageLink: '${recipeData.image}',
+                    source: '${recipeData.source}',
+                    cal: '${recipeData.calories}',
+                    ingr: '${recipeData.ingredients!.length}',
+                  ),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
                     CupertinoPageRoute(
                       builder: (context) => RecipeDetailPage(
+                        index :index,
                         label: '${recipeData.label}',
                         imageLink: '${recipeData.image}',
                         source: '${recipeData.source}',
