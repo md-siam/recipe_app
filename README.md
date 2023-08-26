@@ -14,7 +14,16 @@ This application is a Pre-assessment for the Flutter Developer position. It's an
 This application is using one third-party package from the open-source community. Thanks to the developers of <a href = "https://pub.dev/packages/graphql_flutter">graphql_flutter: ^5.1.2 </a> for this amazing package. The purpose of using this package is to run GraphQL quartes in a flutter application.
 
 ```yaml
-  graphql_flutter: ^5.1.2   //For using graphQL API
+  # For rendering svg files
+  flutter_svg: ^2.0.7
+  # For accessing .env files
+  flutter_dotenv: ^5.1.0
+  # For http calls
+  dio: ^5.3.2
+  # For state management
+  provider: ^6.0.5
+  # For tab bar
+  buttons_tabbar: ^1.3.7+1
 ```
 
 <p align="center">
@@ -38,9 +47,14 @@ lib/
 ├── pages/
 │   ├── recipe_detail_page.dart
 │   └── recipe_page.dart
+├── services/
+│   └── get_recipe_data.dart
+├── view_models/
+│   └── recipe_info_provider.dart
 ├── widgets/
 │   ├── deep_label.dart
 │   ├── empty_search.dart
+│   ├── error_search.dart
 │   ├── health_n_cuisine_card.dart
 │   ├── ingredient_card.dart
 │   ├── light_label.dart
@@ -48,6 +62,7 @@ lib/
 │   ├── nutrition_card_2.dart
 │   ├── recipe_card.dart
 │   ├── refine_search_text.dart
-│   └── rounded_button.dart
+│   ├── rounded_button.dart
+│   └── tab_widget.dart
 └── main.dart
 ```

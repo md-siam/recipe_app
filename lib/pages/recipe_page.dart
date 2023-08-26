@@ -76,12 +76,12 @@ class _RecipePageState extends State<RecipePage> {
             padding: const EdgeInsets.only(
               top: 8.0,
               bottom: 8.0,
-              left: 5.0,
+              right: 8.0,
             ),
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  const Color(0xFF3BCC36),
+                  const Color(0xFF6ACC00),
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
