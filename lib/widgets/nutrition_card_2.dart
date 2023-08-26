@@ -99,94 +99,93 @@ class NutritionCard2 extends StatelessWidget {
     double percentage = ((total! - daily!) / total) * 100;
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(width: 5.0),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: SvgPicture.asset(
-              'asset/images/arrow_down.svg',
-              colorFilter: const ColorFilter.mode(
-                Colors.black,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          const Spacer(),
-          SizedBox(
-            height: 100,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Row(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Row(
                     children: [
                       Text(
-                        '${total.toString().split('.').first}g',
+                        label,
                         style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(width: 50),
-                      Text(
-                        '${percentage.toString().split('.').first}%',
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                      const SizedBox(width: 5.0),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: SvgPicture.asset(
+                          'asset/images/arrow_down.svg',
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    width: 130,
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.black,
-                    ),
+                ),
+                Text(
+                  '${total.toString().split('.').first}g',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
-                  SizedBox(
-                    height: 100,
-                    width: 200,
-                    child: subCategory != null
-                        ? ListView.builder(
-                            itemCount: subCategory.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Row(
-                                children: [
-                                  Text('${subCategory[index].label}'),
-                                  const Spacer(),
-                                  Text(
-                                      '${subCategory[index].total.toString().split('.').first}g'),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    '${subCategory[index].total.toString().split('.').first}%',
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        : const SizedBox.shrink(),
+                ),
+                const SizedBox(width: 50),
+                Text(
+                  '${percentage.toString().split('.').first}%',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 100,
+              child: subCategory != null
+                  ? ListView.builder(
+                      itemCount: subCategory.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            Text('${subCategory[index].label}'),
+                            const Spacer(),
+                            Text(
+                                '${subCategory[index].total.toString().split('.').first}g'),
+                            const SizedBox(width: 50),
+                            Text(
+                              '${subCategory[index].total.toString().split('.').first}%',
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }
