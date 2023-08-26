@@ -14,7 +14,6 @@ import '../widgets/rounded_button.dart';
 import '../widgets/tab_widget.dart';
 
 class RecipeDetailPage extends StatefulWidget {
-  final int index;
   final String label;
   final String imageLink;
   final String source;
@@ -29,7 +28,6 @@ class RecipeDetailPage extends StatefulWidget {
 
   const RecipeDetailPage({
     Key? key,
-    required this.index,
     required this.label,
     required this.imageLink,
     required this.source,
@@ -48,14 +46,6 @@ class RecipeDetailPage extends StatefulWidget {
 }
 
 class _RecipeDetailPageState extends State<RecipeDetailPage> {
-  final TextEditingController _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.clear();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,18 +84,19 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                         ),
                         leading: const Icon(Icons.search),
                         hintText: 'Search...',
-                        controller: _controller,
+                        controller: null,
                         constraints: const BoxConstraints(
                           maxHeight: 40,
                         ),
                         trailing: [
                           IconButton(
                             icon: const Icon(Icons.clear),
-                            onPressed: () {
-                              _controller.clear();
-                            },
+                            onPressed: () {},
                           )
                         ],
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -173,15 +164,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ],
                                 ),
                               ),
-                              Hero(
-                                tag: widget.index,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                    widget.imageLink,
-                                    height: 168,
-                                    width: 168,
-                                  ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  widget.imageLink,
+                                  height: 168,
+                                  width: 168,
                                 ),
                               ),
                             ],

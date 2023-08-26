@@ -173,7 +173,8 @@ class NutritionCard2 extends StatelessWidget {
                             Text('${subCategory[index].label}'),
                             const Spacer(),
                             Text(
-                                '${subCategory[index].total.toString().split('.').first}g'),
+                              '${subCategory[index].total.toString().split('.').first}g',
+                            ),
                             const SizedBox(width: 50),
                             Text(
                               '${subCategory[index].total.toString().split('.').first}%',
