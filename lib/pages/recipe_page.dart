@@ -135,7 +135,7 @@ class _RecipePageState extends State<RecipePage> {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: .87,
+              childAspectRatio: 0.87,
             ),
             itemBuilder: (BuildContext context, int index) {
               final recipeData = provider.recipeList![index].recipe!;
