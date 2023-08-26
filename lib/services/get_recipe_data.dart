@@ -9,7 +9,7 @@ import '../models/recipe_model.dart';
 Future<List<RecipeModel>> getRecipeData(String query) async {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://edamam-recipe-search.p.rapidapi.com/search',
+      baseUrl: 'https://edamam-recipe-search.p.rapidapi.com/api/recipes/v2',
       headers: {
         'X-RapidAPI-Key': dotenv.env['X_RapidAPI_Key'],
         'X-RapidAPI-Host': dotenv.env['X_RapidAPI_Host'],
@@ -21,6 +21,7 @@ Future<List<RecipeModel>> getRecipeData(String query) async {
     Response response = await dio.get(
       '',
       queryParameters: {
+        'type': 'any',
         'q': query,
       },
     );

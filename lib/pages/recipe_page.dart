@@ -113,61 +113,62 @@ class _RecipePageState extends State<RecipePage> {
                     : Padding(
                         padding: const EdgeInsets.all(8)
                             .copyWith(top: 15, bottom: 0),
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              GridView.builder(
-                                itemCount: 10,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: .87,
-                                ),
-                                itemBuilder: (BuildContext context, int index) {
-                                  final recipeData =
-                                      provider.recipeList![index].recipe!;
-
-                                  return GestureDetector(
-                                    child: RecipeCard(
-                                      label: '${recipeData.label}',
-                                      imageLink: '${recipeData.image}',
-                                      source: '${recipeData.source}',
-                                      cal: '${recipeData.calories}',
-                                      ingr: '${recipeData.ingredients!.length}',
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                          builder: (context) =>
-                                              RecipeDetailPage(
-                                            label: '${recipeData.label}',
-                                            imageLink: '${recipeData.image}',
-                                            source: '${recipeData.source}',
-                                            healthLabel:
-                                                recipeData.healthLabels,
-                                            cuisineType: recipeData.cuisineType,
-                                            ingredientLines:
-                                                recipeData.ingredientLines,
-                                            totalDaily: recipeData.totalDaily,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
+                        child: _customGripViewBuilder(provider),
                       );
               },
             )
           : const EmptySearch(),
+    );
+  }
+
+  //
+  //
+  _customGripViewBuilder(RecipeInfoProvider provider) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          GridView.builder(
+            itemCount: provider.recipeList!.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: .87,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              final recipeData = provider.recipeList![index].recipe!;
+
+              return GestureDetector(
+                child: RecipeCard(
+                  label: '${recipeData.label}',
+                  imageLink: '${recipeData.image}',
+                  source: '${recipeData.source}',
+                  cal: '${recipeData.calories}',
+                  ingr: '${recipeData.ingredients!.length}',
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => RecipeDetailPage(
+                        label: '${recipeData.label}',
+                        imageLink: '${recipeData.image}',
+                        source: '${recipeData.source}',
+                        healthLabel: recipeData.healthLabels,
+                        cuisineType: recipeData.cuisineType,
+                        ingredientLines: recipeData.ingredientLines,
+                        totalDaily: recipeData.totalDaily,
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 }
