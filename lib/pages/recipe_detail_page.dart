@@ -11,6 +11,7 @@ import '../widgets/nutrition_card_1.dart';
 import '../widgets/nutrition_card_2.dart';
 import '../widgets/refine_search_text.dart';
 import '../widgets/rounded_button.dart';
+import '../widgets/tab_widget.dart';
 
 class RecipeDetailPage extends StatefulWidget {
   final int index;
@@ -23,6 +24,7 @@ class RecipeDetailPage extends StatefulWidget {
   final double? calories;
   final double? servings;
   final TotalDaily? totalDaily;
+  final List<String>? dietLabels;
 
   const RecipeDetailPage({
     Key? key,
@@ -36,6 +38,7 @@ class RecipeDetailPage extends StatefulWidget {
     this.calories,
     this.servings,
     this.totalDaily,
+    this.dietLabels,
   }) : super(key: key);
 
   @override
@@ -250,13 +253,9 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Tags'),
                           const SizedBox(height: 5.0),
-                          const Text(
-                            'Low-Carb, Dairy-Free, Egg-Free, Peanut-Free, Tree-Nut-Free, Soy-Free, Fish-Free',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: AppColors.kDeepGrey,
-                              decoration: TextDecoration.underline,
-                            ),
+                          TabWidget(
+                            dietLabels: widget.dietLabels,
+                            healthLabel: widget.healthLabel,
                           ),
                           //
                           const SizedBox(height: 20),
