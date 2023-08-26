@@ -14,7 +14,6 @@ import '../widgets/rounded_button.dart';
 import '../widgets/tab_widget.dart';
 
 class RecipeDetailPage extends StatefulWidget {
-  final int index;
   final String label;
   final String imageLink;
   final String source;
@@ -28,7 +27,6 @@ class RecipeDetailPage extends StatefulWidget {
 
   const RecipeDetailPage({
     Key? key,
-    required this.index,
     required this.label,
     required this.imageLink,
     required this.source,
@@ -171,15 +169,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ],
                                 ),
                               ),
-                              Hero(
-                                tag: widget.index,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                    widget.imageLink,
-                                    height: 168,
-                                    width: 168,
-                                  ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.network(
+                                  widget.imageLink,
+                                  height: 168,
+                                  width: 168,
                                 ),
                               ),
                             ],
