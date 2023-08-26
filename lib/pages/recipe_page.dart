@@ -121,8 +121,9 @@ class _RecipePageState extends State<RecipePage> {
     );
   }
 
-  //
-  //
+  /// displays all the recipe in [grid view]
+  ///
+  ///
   _customGripViewBuilder(RecipeInfoProvider provider) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -158,6 +159,8 @@ class _RecipePageState extends State<RecipePage> {
                         healthLabel: recipeData.healthLabels,
                         cuisineType: recipeData.cuisineType,
                         ingredientLines: recipeData.ingredientLines,
+                        calories: recipeData.calories,
+                        servings: recipeData.yield,
                         totalDaily: recipeData.totalDaily,
                       ),
                     ),

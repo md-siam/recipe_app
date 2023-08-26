@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'package:recipe_app/core/app_color.dart';
-
+import '../core/app_color.dart';
 import '../models/recipe_model.dart';
 
 class NutritionCard1 extends StatelessWidget {
+  final double? calories;
+  final double? serving;
   final TotalDaily? totalDaily;
   const NutritionCard1({
     Key? key,
+    this.calories,
+    this.serving,
     this.totalDaily,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cal = totalDaily!.cA!.quantity.toString().split('.').first;
+    int cal = (calories! / serving!).ceil();
+    double? daily = totalDaily!.cHOCDF!.quantity;
+    double? serv = serving;
+    //
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -21,7 +27,10 @@ class NutritionCard1 extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _infoSection(cal, 'CAL / SERV'),
+            _infoSection(
+              cal.toString(),
+              'CAL / SERV',
+            ),
             const SizedBox(
               height: 50,
               child: VerticalDivider(
@@ -29,7 +38,10 @@ class NutritionCard1 extends StatelessWidget {
                 color: AppColors.kBoldTextColor,
               ),
             ),
-            _infoSection('7%', 'DAILY VALUE'),
+            _infoSection(
+              '${daily.toString().split('.').first}%',
+              'DAILY VALUE',
+            ),
             const SizedBox(
               height: 50,
               child: VerticalDivider(
@@ -37,7 +49,10 @@ class NutritionCard1 extends StatelessWidget {
                 color: AppColors.kBoldTextColor,
               ),
             ),
-            _infoSection('8', 'SERVINGS'),
+            _infoSection(
+              serv.toString().split('.').first,
+              'SERVINGS',
+            ),
           ],
         ),
       ],
