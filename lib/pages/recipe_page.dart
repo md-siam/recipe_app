@@ -140,32 +140,36 @@ class _RecipePageState extends State<RecipePage> {
             itemBuilder: (BuildContext context, int index) {
               final recipeData = provider.recipeList![index].recipe!;
 
-              return GestureDetector(
-                child: RecipeCard(
-                  label: '${recipeData.label}',
-                  imageLink: '${recipeData.image}',
-                  source: '${recipeData.source}',
-                  cal: '${recipeData.calories}',
-                  ingr: '${recipeData.ingredients!.length}',
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => RecipeDetailPage(
-                        label: '${recipeData.label}',
-                        imageLink: '${recipeData.image}',
-                        source: '${recipeData.source}',
-                        healthLabel: recipeData.healthLabels,
-                        cuisineType: recipeData.cuisineType,
-                        ingredientLines: recipeData.ingredientLines,
-                        calories: recipeData.calories,
-                        servings: recipeData.yield,
-                        totalDaily: recipeData.totalDaily,
+              return Hero(
+                tag: index,
+                child: GestureDetector(
+                  child: RecipeCard(
+                    label: '${recipeData.label}',
+                    imageLink: '${recipeData.image}',
+                    source: '${recipeData.source}',
+                    cal: '${recipeData.calories}',
+                    ingr: '${recipeData.ingredients!.length}',
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => RecipeDetailPage(
+                          index: index,
+                          label: '${recipeData.label}',
+                          imageLink: '${recipeData.image}',
+                          source: '${recipeData.source}',
+                          healthLabel: recipeData.healthLabels,
+                          cuisineType: recipeData.cuisineType,
+                          ingredientLines: recipeData.ingredientLines,
+                          calories: recipeData.calories,
+                          servings: recipeData.yield,
+                          totalDaily: recipeData.totalDaily,
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             },
           ),

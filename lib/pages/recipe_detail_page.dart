@@ -13,6 +13,7 @@ import '../widgets/refine_search_text.dart';
 import '../widgets/rounded_button.dart';
 
 class RecipeDetailPage extends StatefulWidget {
+  final int index;
   final String label;
   final String imageLink;
   final String source;
@@ -25,6 +26,7 @@ class RecipeDetailPage extends StatefulWidget {
 
   const RecipeDetailPage({
     Key? key,
+    required this.index,
     required this.label,
     required this.imageLink,
     required this.source,
@@ -166,12 +168,15 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                   ],
                                 ),
                               ),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  widget.imageLink,
-                                  height: 168,
-                                  width: 168,
+                              Hero(
+                                tag: widget.index,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.network(
+                                    widget.imageLink,
+                                    height: 168,
+                                    width: 168,
+                                  ),
                                 ),
                               ),
                             ],
@@ -202,7 +207,12 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                               itemBuilder: (BuildContext context, int index) {
                                 final split =
                                     widget.ingredientLines![index].split(' ');
-                                if (split.length == 2) {
+                                if (split.length == 1) {
+                                  return IngredientCard(
+                                    title: split[0],
+                                    subtitle: split[0],
+                                  );
+                                } else if (split.length == 2) {
                                   return IngredientCard(
                                     title: split[0],
                                     subtitle: split[1],
