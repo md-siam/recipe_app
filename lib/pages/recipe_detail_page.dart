@@ -24,6 +24,7 @@ class RecipeDetailPage extends StatefulWidget {
   final double? servings;
   final TotalDaily? totalDaily;
   final List<String>? dietLabels;
+  final List<Digest>? digest;
 
   const RecipeDetailPage({
     Key? key,
@@ -37,6 +38,7 @@ class RecipeDetailPage extends StatefulWidget {
     this.servings,
     this.totalDaily,
     this.dietLabels,
+    this.digest,
   }) : super(key: key);
 
   @override
@@ -255,8 +257,8 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                           //
                           const SizedBox(height: 20),
                           const DeepLabel(label: 'Nutrition'),
-                          const NutritionCard2(
-                            title: 'Fat',
+                          NutritionCard2(
+                            digest: widget.digest,
                           ),
                           //
                           const SizedBox(height: 24),

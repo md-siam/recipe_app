@@ -134,6 +134,7 @@ class _RecipePageState extends State<RecipePage> {
                         servings: recipeData.yield,
                         totalDaily: recipeData.totalDaily,
                         dietLabels: recipeData.dietLabels,
+                        digest: recipeData.digest,
                       ),
                     ),
                   );

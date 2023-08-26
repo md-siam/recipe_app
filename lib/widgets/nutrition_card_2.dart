@@ -1,19 +1,21 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../core/app_color.dart';
+import '../models/recipe_model.dart';
 
 class NutritionCard2 extends StatelessWidget {
-  final String title;
+  final List<Digest>? digest;
   const NutritionCard2({
     Key? key,
-    required this.title,
+    this.digest,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 6,
+      length: digest!.length,
       child: Column(
         children: [
           Padding(
@@ -50,14 +52,10 @@ class NutritionCard2 extends StatelessWidget {
                     fontSize: 15,
                     color: Colors.black,
                   ),
-                  tabs: const [
-                    Tab(text: "Fat"),
-                    Tab(text: "Carbs"),
-                    Tab(text: "Protein"),
-                    Tab(text: "Cholesterol"),
-                    Tab(text: "Vitamin"),
-                    Tab(text: "Minerals"),
-                  ],
+                  tabs: List.generate(
+                    digest!.length,
+                    (index) => Tab(text: digest![index].label),
+                  ),
                 ),
               ),
             ),
@@ -65,30 +63,23 @@ class NutritionCard2 extends StatelessWidget {
           const SizedBox(height: 15),
           Stack(
             children: [
-              Image.asset('asset/images/nutrition_card_2.png'),
-              const SizedBox(
-                height: 100,
+              Image.asset(
+                'asset/images/nutrition_card_2.png',
+                height: 150,
+              ),
+              SizedBox(
+                height: 150,
                 child: TabBarView(
-                  children: [
-                    Center(
-                      child: Icon(Icons.directions_car),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_transit),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_bike),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_car),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_transit),
-                    ),
-                    Center(
-                      child: Icon(Icons.directions_bike),
-                    ),
-                  ],
+                  children: List.generate(
+                    digest!.length,
+                    (index) {
+                      return _digestInformation(
+                        '${digest![index].label}',
+                        digest![index].total,
+                        digest![index].daily,
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
@@ -96,36 +87,73 @@ class NutritionCard2 extends StatelessWidget {
         ],
       ),
     );
+  }
 
-    // Stack(
-    //   alignment: Alignment.center,
-    //   children: [
-    //     Image.asset('asset/images/nutrition_card_2.png'),
-    //     Positioned(
-    //       top: 10,
-    //       left: 10,
-    //       child: Row(
-    //         children: [
-    //           Text(
-    //             title,
-    //             style: const TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.black,
-    //               fontWeight: FontWeight.bold,
-    //             ),
-    //           ),
-    //           const SizedBox(width: 5.0),
-    //           SvgPicture.asset(
-    //             'asset/images/arrow_down.svg',
-    //             colorFilter: const ColorFilter.mode(
-    //               Colors.black,
-    //               BlendMode.srcIn,
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     )
-    //   ],
-    // );
+  Widget _digestInformation(String label, double? total, double? daily) {
+    double percentage = ((total! - daily!) / total) * 100;
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(width: 5.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: SvgPicture.asset(
+              'asset/images/arrow_down.svg',
+              colorFilter: const ColorFilter.mode(
+                Colors.black,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          const Spacer(),
+          SizedBox(
+            height: 100,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        '${total.toString().split('.').first}g',
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 50),
+                      Text(
+                        '${percentage.toString().split('.').first}%',
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 130,
+                    child: Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
